@@ -1,7 +1,13 @@
+# az ad sp create-for-rbac --name "<service-principal-name>" --role contributor --scopes /subscriptions/<subscription-id>/resourceGroups/<your-resource-group-name>
+  # place the output (a dict) into a GitHub repository secret.
+  # https://docs.github.com/en/actions/how-tos/security-for-github-actions/security-guides/using-secrets-in-github-actions 
 name: Manually trigger an Azure Machine Learning job
 
 on:
   workflow_dispatch:
+
+# on:
+#   [push]
 
 jobs:
   train:
@@ -15,5 +21,9 @@ jobs:
       uses: azure/login@v1
       with:
         creds: ${{secrets.AZURE_CREDENTIALS}}
+    - name: Trigger model training
+      run: az ml job create --file .\src\job.yml --resource-group tdg-VDI-360Automation --workspace-name tdg-ml-resource
+
+# Could access a specific value like this: ${{ fromJson(secrets.AZURE_CREDENTIALS).<key> }}
 
 
