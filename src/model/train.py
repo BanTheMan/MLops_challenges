@@ -64,7 +64,7 @@ def parse_args():  # sourcery skip: inline-immediately-returned-variable
     parser.add_argument("--training_data", dest='training_data',
                         type=str)
     parser.add_argument("--reg_rate", dest='reg_rate',
-                        type=float, default=0.005)
+                        type=float, default=0.0075)
 
     # parse args
     args = parser.parse_args()
