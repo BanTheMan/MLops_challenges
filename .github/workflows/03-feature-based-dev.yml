@@ -1,0 +1,13 @@
+name: Trigger GitHub Actions with feature-based development
+
+on:
+  push:
+      branches:
+          - "main"
+
+jobs:
+  protect_main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Placeholder
+        run: echo "Will add code checks here in next challenge"
