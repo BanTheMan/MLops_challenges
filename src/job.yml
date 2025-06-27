@@ -1,3 +1,5 @@
+# az ml data create --name diabetes-training-data --path ./experimentation/data --type uri_folder --resource-group my-resource-group --workspace-name my-workspace
+# az ml job create --file .\src\job.yml --resource-group my-resource-group --workspace-name my-workspace
 $schema: https://azuremlschemas.azureedge.net/latest/commandJob.schema.json
 code: model
 command: >-
@@ -7,9 +9,9 @@ command: >-
 inputs:
   training_data: 
     type: uri_folder 
-    path: "./experimentation/data"
+    path: azureml:azureml_funny_morning_7x37q577t9_input_data_training_data:1
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
-compute: "bgomes1"
+compute: "tdg-ai-labeling-cluster"
 experiment_name: "MLOps-learning"
 description: "An experiment to complete the challenges in the Azure MLOps training https://learn.microsoft.com/en-us/training/paths/build-first-machine-operations-workflow/"

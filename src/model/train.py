@@ -26,12 +26,14 @@ def main(args):
 
 
 def get_csvs_df(path):
+    # sourcery skip: swap-if-else-branches, use-named-expression
     if not os.path.exists(path):
         raise RuntimeError(f"Cannot use non-existent path provided: {path}")
-    if csv_files := glob.glob(f"{path}/*.csv"):
-        return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
-    else:
+    csv_files = glob.glob(f"{path}/*.csv")
+    if not csv_files:
         raise RuntimeError(f"No CSV files found in provided data path: {path}")
+    return pd.concat((pd.read_csv(f) for f in csv_files), sort=False)
+
 
 
 def split_data(df: pd.DataFrame):
@@ -54,7 +56,7 @@ def train_model(reg_rate, X_train, X_test, y_train, y_test):
     LogisticRegression(C=1/reg_rate, solver="liblinear").fit(X_train, y_train)
 
 
-def parse_args():
+def parse_args():  # sourcery skip: inline-immediately-returned-variable
     # setup arg parser
     parser = argparse.ArgumentParser()
 
@@ -64,7 +66,12 @@ def parse_args():
     parser.add_argument("--reg_rate", dest='reg_rate',
                         type=float, default=0.01)
 
-    return parser.parse_args()
+    # parse args
+    args = parser.parse_args()
+
+    # return args
+    return args
+
 
 # run script
 if __name__ == "__main__":
