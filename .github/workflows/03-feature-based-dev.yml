@@ -15,4 +15,4 @@ jobs:
     steps:
       - name: Placeholder
         run: |
-          .github\workflows\04-code-checks.yml
+          echo "Added checks"
